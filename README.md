@@ -24,4 +24,4 @@ This payload will use Key Croc MATCH command using regular expressions pattern.
 
 Overall, this regular expression pattern is used to validate that a string follows the basic format of an email address. However, it does not guarantee that the email address is actually valid or in use.
 
-  -After MATCH pattern, payload will run the SAVEKEYS command and Attempt to capture password, this will save all characters until ENTER key is pressed
+  -After MATCH pattern, payload will run the SAVEKEYS command and Attempt to capture password, this will save all characters until ENTER key is pressed.
